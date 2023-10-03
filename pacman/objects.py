@@ -23,7 +23,7 @@ class GameObject(Sprite):
         self.width = width
         self.height = height
         self.sprite_filename = f"{sprite_fname}.{DEFAULT_IMG_EXT if '.' not in sprite_fname else ''}"
-        sprite_image_full_path = os.path.join("resources", 'images', self.sprite_filename)
+        sprite_image_full_path = os.path.join("..", "resources", self.sprite_filename)
         self.image = scale(load(sprite_image_full_path), (self.width, self.height))
         self.image.set_colorkey(self.color_key)
         self.rect = self.image.get_rect()

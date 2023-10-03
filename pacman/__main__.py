@@ -1,10 +1,8 @@
-from pacman.src.game import Game
-import pygame
+from pacman.game import Game
 
 
 def main() -> None:
     packman_game = Game()
-    print(pygame.display.Info())
     packman_game.run()
 
 
