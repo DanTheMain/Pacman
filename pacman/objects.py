@@ -1,4 +1,6 @@
 import os
+from typing import Tuple, Any
+from dataclasses import dataclass
 
 from pygame import Surface
 from pygame.image import load
@@ -12,8 +14,8 @@ class GameObject(Sprite):
     sprite_filename: str
     topleft_x: int
     topleft_y: int
-    width: int = 40
-    height: int = 40
+    width: int
+    height: int
     color_key: tuple[int, int, int] = (245, 245, 245)
 
     def __init__(self, topleft_x: int, topleft_y: int, width: int, height: int, sprite_fname: str):
@@ -21,7 +23,7 @@ class GameObject(Sprite):
         self.width = width
         self.height = height
         self.sprite_filename = f"{sprite_fname}.{DEFAULT_IMG_EXT if '.' not in sprite_fname else ''}"
-        sprite_image_full_path = os.path.join("resources", 'images', self.sprite_filename)
+        sprite_image_full_path = os.path.join("..", "resources", self.sprite_filename)
         self.image = scale(load(sprite_image_full_path), (self.width, self.height))
         self.image.set_colorkey(self.color_key)
         self.rect = self.image.get_rect()
@@ -45,3 +47,9 @@ class Wall(GameObject):
 class Bot(GameObject):
     pass
 
+
+@dataclass
+class GameContext:
+    player: Player
+    walls: Any
+    bots: Any
