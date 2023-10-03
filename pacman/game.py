@@ -109,20 +109,20 @@ class Game:
 
     def move_bots(self) -> None:
         for bot in self._context.bots:
-            bot.old_topleft = bot.rect.topleft
+            old_topleft = bot.rect.topleft
             bot.rect = bot.rect.move(
                 random.choice(range(-Game.bot_move_range, Game.bot_move_range + 1)) * Game.bot_speed,
                 random.choice(range(-Game.bot_move_range, Game.bot_move_range + 1)) * Game.bot_speed,
             )
             if spritecollide(sprite=bot, group=self._context.walls, dokill=False):
-                bot.rect.topleft = bot.old_topleft
+                bot.rect.topleft = old_topleft
 
     def move_player(self) -> None:
         player = self._context.player
         keys = self._game.key.get_pressed()
         speed = Game.player_speed
 
-        player.old_topleft = player.rect.topleft
+        old_topleft = player.rect.topleft
         if keys[pygame.K_w] or keys[pygame.K_UP]:
             player.rect = player.rect.move(0, -Game.player_move_range * speed)
         if keys[pygame.K_s] or keys[pygame.K_DOWN]:
@@ -133,7 +133,7 @@ class Game:
             player.rect = player.rect.move(Game.player_move_range * speed, 0)
 
         if spritecollide(player, self._context.walls, dokill=False):
-            player.rect.topleft = player.old_topleft
+            player.rect.topleft = old_topleft
 
         if spritecollide(player, self._context.bots, dokill=True):
             self.quit_game()

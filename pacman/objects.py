@@ -37,7 +37,7 @@ class GameObject(Sprite):
 
 
 class Player(GameObject):
-    old_topleft: Tuple[int, int]
+    pass
 
 
 class Wall(GameObject):
@@ -45,8 +45,7 @@ class Wall(GameObject):
 
 
 class Bot(GameObject):
-    bot_id: str
-    old_topleft: Tuple[int, int]
+    pass
 
 
 @dataclass
